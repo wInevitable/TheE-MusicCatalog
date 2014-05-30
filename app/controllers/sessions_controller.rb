@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   #must be signed in to end a session (sign out)
   before_action :require_signed_in!, :only => [:destroy]
   
-  def new
+  def new #log-in page
   end
   
   def create
@@ -34,6 +34,6 @@ class SessionsController < ApplicationController
   private
   
   def user_params
-    params.require(:user).permit(:username, :password)
+    params.require(:user_params).permit(:username, :password)
   end
 end

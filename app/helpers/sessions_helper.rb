@@ -1,7 +1,8 @@
 module SessionsHelper
   
   def current_user
-    User.find_by_token(session[:session_token])
+    return nil unless session[:token]
+    @current_user ||= User.find_by_token(session[:token])
   end
   
   def current_user_id
@@ -15,6 +16,10 @@ module SessionsHelper
   
   def require_user!
     redirect_to sessions_url if current_user.nil?
+  end
+  
+  def signed_in?
+    !!current_user
   end
   
   def require_signed_in!

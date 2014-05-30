@@ -41,6 +41,7 @@ end
 #gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'bcrypt-ruby', require: 'bcrypt'
 
+gem 'pry-rails', :group => :development
 # Use unicorn as the app server
 # gem 'unicorn'
 

@@ -2,9 +2,44 @@
 <html>
 <head>
   <title>The eMusic Catalog [TeC]</title>
+  <%= csrf_meta_tags %>
 </head>
 <body>
 
+<nav>
+  <a href="<%= root_url %>">Home</a>
+  <% if signed_in? %>
+    <!-- diplay username and sign out button -->
+    <span>Hello, <%= current_user.email %></span>
+    <a href="<%= user_url(current_user.id) %>" >My Profile</a>
+    <a href="" >Rate A Band</a>
+    <a href="" >Leave A Comment</a>
+    <form action="<%= session_url %>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <button>Log Out</button>
+    </form>
+  
+  <% else %> <!-- display Log In and Register links -->
+    <a href="<%= new_session_url %>">Log In</a>
+    <a href="<%= new_user_url %>">Register</a>
+  <% end %>
+</nav>
+
+<% if flash.now %>
+  <p><b><i><%= flash.now[:errors] %></i></b></p>
+<% end %>
+
+<!-- display any errors -->
+<% if flash[:errors] %>
+<h3>Please fix the following errors:</h3>
+<ul>
+  <% flash[:errors].each do |error| %>
+    <li><b><i><%= error %></b></i></li>
+  <% end %>
+</ul>
+<% end %>
+  
 <%= yield %>
 
 </body>
