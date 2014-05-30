@@ -11,7 +11,7 @@ module SessionsHelper
   
   def log_in_user!(user)
     user.reset_session_token!
-    session[:session_token] = user.token
+    session[:token] = user.token
   end
   
   def require_user!

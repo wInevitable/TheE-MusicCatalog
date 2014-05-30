@@ -1,0 +1,20 @@
+<h1><%= verb %> Band</h1>
+
+<% unless band.errors.blank? %>
+  <p><%= band.errors.full_messages %></p>
+<% end %>
+
+<% if band.persisted? %>
+  <form action="<%= band_url(band.id) %>" method="post">
+    <input type="hidden" name="_method" value="put">
+<% else %>
+  <form action="<%= bands_url %>" method="post">
+<% end %>
+
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+ 
+  <label for="band_name">Enter the Band Name:</label>
+  <input type="text" value="<%= band.name %>" name="band[name]" id="band_name">
+  <br>
+  <button>Submit</button>
+</form>

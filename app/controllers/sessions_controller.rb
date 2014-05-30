@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
   
   def create
     @user = User.find_by_credentials(
-      user_params[:email]
+      user_params[:email],
       user_params[:password]
     )
     
@@ -20,13 +20,11 @@ class SessionsController < ApplicationController
       flash.now[:errors] = ["Invalid Credentials"]
       render :new
     end
-    #reset session[:token] and user.token
-    #redirect to user#show
   end
   
   def destroy #reset user's token and session's token
     current_user.reset_session_token!
-    session[:session_token] = nil
+    session[:token] = nil
     
     redirect_to new_session_url
   end
@@ -34,6 +32,6 @@ class SessionsController < ApplicationController
   private
   
   def user_params
-    params.require(:user_params).permit(:username, :password)
+    params.require(:user).permit(:email, :password)
   end
 end

@@ -1,0 +1,9 @@
+<h1>Band Directory</h1>
+
+<ul>
+  <% @bands.each do |band| %>
+    <li><a href="<%= band_url(band.id) %>"><%= band.name %></a></li>
+  <% end %>
+</ul>
+
+<a href="<%= new_band_url %>">Add A Band To Our Listing</a>

@@ -1,19 +1,25 @@
-<h1>Register Now to Discover All of Today's Hot New Music</h1>
+<h1>Register Now!
+  <span>Discover All of Today's Hot New Music with The eMusic Catalog.</span>
+</h1>
 
 <form action="<%= users_url %>" method="post">
   
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input
+  type="hidden"
+  name="authenticity_token"
+  value="<%= form_authenticity_token %>"
+  >
 
-  <label for="user-email">Enter Your Email:</label>
-  <input type="text" name="user_params[email]" value="" id="user-email">
-
-  <label for="user-password">Enter Your Password:</label>
-  <input type="password" name="user_params[password]" value="" id="user-password">
-  
+  <label for="user_email">Enter Your Email:</label>
+  <input type="text" name="user[email]" id="user_email">
+  <br>
+  <label for="user_password">Enter Your Password:</label>
+  <input type="password" name="user[password]" id="user_password">
+  <br>
   <!-- refactor this code with appropriate Rails worthy stuff -->
-  <label for="verify-password">Verify Your Password:</label>
-  <input type="password" name="user_params[password2]" value="" id="verify-password">
+  <label for="verify_password">Verify Your Password:</label>
+  <input type="password" name="user[password2]" id="verify_password">
   <!-- -->
-  
+  <br>
   <button>Register Now!</button>
 </form>

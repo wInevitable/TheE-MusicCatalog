@@ -1,0 +1,70 @@
+<h1><%= verb %> Album</h1>
+
+<form>
+  <% unless album.errors.blank? %>
+    <p><%= album.errors.full_messages %></p>
+  <% end %>
+
+  <% if album.persisted? %> <!-- edit -->
+    <form action="<%= edit_album_url(@album.id) %>" method="post">
+      <input type="hidden" name="_method" value="put">
+  <% else %>
+    <form action="<%= band_albums_url(@band.id) %>" method="post">
+  <% end %>
+
+  <input
+  type="hidden"
+  name="authenticity_token"
+  value="<%= form_authenticity_token %>"
+  >
+
+  <label for="album_name">Enter the Album Name</label>
+  <input
+  type="text"
+  value="<%= @album.name %>"
+  name="album[name]"
+  id="album_name"
+  >
+  <br>
+
+  <label for="album_band">Select the Band Name</label>
+  <select name="album[band_id]" id="album_band">
+    <% Band.all.each do |band| %>
+      <option
+        <%= @album.band_id == band.id ? "selected" : "" %>
+        value="<%= band.id %>"
+      >
+        <%= band.name.capitalize %>
+      </option>
+    <% end %>
+  </select>
+  <br>
+  
+  <input
+  type="radio"
+  name="album[live]"
+  value="true"
+  id="album_live_true"
+  >
+  <label for="album_live_true">Live</label>
+  
+  <input
+  type="radio"
+  name="album[live]"
+  value="false"
+  id="album_live_false"
+  >
+  <label for="album_live_false">Studio</label>
+  <br>
+  
+  <label for="album_year">Enter the Album Year</label>
+  <input
+  type="text"
+  value="<%= @album.year %>"
+  name="album[year]"
+  id="album_year"
+  >
+
+  <br>
+  <button>Submit</button>
+</form>

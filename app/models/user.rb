@@ -1,18 +1,19 @@
 class User < ActiveRecord::Base
   
+  attr_reader :password
+  
   validates :email, :token, { :uniqueness => true }
   validates :email, :token, :password_digest, { :presence => true }
-  validates :password, :length => { :minimum => 6, :allow nil => true 
+  validates :password, :length => { :minimum => 6, :allow_nil => true }
     
   before_validation :ensure_session_token
   
   #has_many comments
-  }
   
   def password=(secret)
     if secret.present?
       @password = secret
-      self.password_digest = BCrpyt::Password.create(secret)
+      self.password_digest = BCrypt::Password.create(secret)
     end
   end
   
@@ -32,7 +33,7 @@ class User < ActiveRecord::Base
   
   def self.find_by_credentials(email, secret)
     @user = User.find_by_email(email)
-    user.try(:is_password?, secret) ? user : nil
+    @user.try(:is_password?, secret) ? @user : nil
   end
   
   private

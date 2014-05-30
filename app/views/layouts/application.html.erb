@@ -2,17 +2,20 @@
 <html>
 <head>
   <title>The eMusic Catalog [TeC]</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
 <nav>
   <a href="<%= root_url %>">Home</a>
+  <a href="<%= bands_url %>" >Bands</a>
+  <br>
   <% if signed_in? %>
     <!-- diplay username and sign out button -->
     <span>Hello, <%= current_user.email %></span>
     <a href="<%= user_url(current_user.id) %>" >My Profile</a>
-    <a href="" >Rate A Band</a>
     <a href="" >Leave A Comment</a>
     <form action="<%= session_url %>" method="post">
         <input type="hidden" name="_method" value="delete">
@@ -24,6 +27,8 @@
     <a href="<%= new_session_url %>">Log In</a>
     <a href="<%= new_user_url %>">Register</a>
   <% end %>
+  
+  <hr>
 </nav>
 
 <% if flash.now %>
